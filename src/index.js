@@ -1,5 +1,18 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var pat_1 = require("./pat");
-(0, pat_1.addPatient)();
-console.log("abc", pat_1.patients);
+/* import * as readline from "readline";
+import { patients,initPatients } from "./pat";
+import { medecins,initMedecins } from "./med";
+import { showMenu } from "./menu";
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+// Initialiser quelques données d'exemple
+initPatients();
+initMedecins();
+
+// Démarrer l'application
+console.log("Bienvenue dans le système de gestion de rendez-vous");
+showMenu(rl, [], patients, medecins); */ 

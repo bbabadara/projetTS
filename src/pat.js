@@ -1,40 +1,39 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.patients = void 0;
-exports.addPatient = addPatient;
-exports.listPatients = listPatients;
-var readline = require("readline");
-var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-var patients = [];
-exports.patients = patients;
-function addPatient() {
-    rl.question("Entrez le nom du patient : ", function (nom) {
-        rl.question("Entrez le prénom du patient : ", function (prenom) {
-            rl.question("Entrez l'adresse du patient : ", function (adresse) {
-                rl.question("Entrez le téléphone du patient : ", function (telephone) {
-                    var patient = {
-                        id: patients.length + 1,
-                        nom: nom,
-                        prenom: prenom,
-                        adresse: adresse,
-                        telephone: telephone
-                    };
-                    patients.push(patient);
-                    console.log("Patient ajouté avec succès.");
-                    listPatients();
-                    rl.close();
+exports.listPatients = exports.addPatient = exports.patients = void 0;
+exports.patients = [];
+function addPatient(rl) {
+    return new Promise((resolve) => {
+        rl.question("Entrez le nom du patient : ", (nom) => {
+            rl.question("Entrez le prénom du patient : ", (prenom) => {
+                rl.question("Entrez l'adresse du patient : ", (adresse) => {
+                    rl.question("Entrez le téléphone du patient : ", (telephone) => {
+                        const patient = {
+                            id: exports.patients.length + 1,
+                            nom,
+                            prenom,
+                            adresse,
+                            telephone
+                        };
+                        exports.patients.push(patient);
+                        console.log("Patient ajouté avec succès.");
+                        listPatients();
+                        resolve();
+                    });
                 });
             });
         });
     });
 }
+exports.addPatient = addPatient;
 function listPatients() {
-    console.log("Liste des Patients:");
-    patients.forEach(function (patient) {
-        console.log("".concat(patient.id, " - ").concat(patient.nom, " - ").concat(patient.prenom, " - ").concat(patient.adresse, " - ").concat(patient.telephone, ")"));
+    console.log("\nListe des Patients:");
+    if (exports.patients.length === 0) {
+        console.log("Aucun patient enregistré.");
+        return;
+    }
+    exports.patients.forEach((patient) => {
+        console.log(`ID: ${patient.id} - ${patient.nom} ${patient.prenom} - Adresse: ${patient.adresse} - Tél: ${patient.telephone}`);
     });
 }
-addPatient();
+exports.listPatients = listPatients;
